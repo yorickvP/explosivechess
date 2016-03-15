@@ -96,7 +96,7 @@ def detectcircles(dst):
 			mask = np.zeros(dst.shape[:2], np.uint8)
 			cv2.circle(mask, (x, y), r, 255, -1)
 			m = cv2.mean(dst, mask=mask)
-			res.append((x, y, colval > 99))
+			res.append((x, y, colval(m) > 99))
 	return res
 
 t = Test("test_images/chess2.jpg")
