@@ -80,7 +80,7 @@ class Test(object):
 		cv2.namedWindow('dst')
 		cv2.namedWindow('warp')
 		for (key, (min, max, cur)) in trackbars.items():
-			cv2.createTrackbar(key, 'warp', min, max, lambda *x: t.draw())
+			cv2.createTrackbar(key, 'warp', min, max, lambda *x: self.draw())
 			cv2.setTrackbarPos(key, 'warp', cur)
 		cv2.setMouseCallback('dst', mousecb)
 		while True:
