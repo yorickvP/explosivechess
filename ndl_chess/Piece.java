@@ -1,4 +1,10 @@
-package ndl_chess;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package chess_ndl;
+
 import java.util.ArrayList;
 
 /**
@@ -12,7 +18,7 @@ public class Piece {
      */
     protected ArrayList<Point> moves;
     protected boolean color;
-    protected boolean hasMoved;
+    protected int nrOfMoves;
 
     public boolean getColor() {
         return color;
@@ -34,12 +40,8 @@ public class Piece {
         Piece p = (Piece) o;
         return color == p.color;
     }
-
-    public void setMoved() {
-        hasMoved = true;
-    }
-
-    public boolean isMoved() {
-        return hasMoved;
+    
+    public Piece copyPiece() {
+        return null;
     }
 }

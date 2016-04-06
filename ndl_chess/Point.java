@@ -1,4 +1,10 @@
-package ndl_chess;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package chess_ndl;
+
 /**
  *
  * @author newdeviceslab_2
@@ -49,6 +55,14 @@ public class Point {
             return -1;
         }
         return 0;
+    }
+    
+    @Override
+    public boolean equals(Object o) {
+        if(o == null || o.getClass() != this.getClass())
+            return false;
+        Point point = (Point) o;
+        return point.getX() == getX() && point.getY() == getY();
     }
 
 }

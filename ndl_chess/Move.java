@@ -1,4 +1,10 @@
-package ndl_chess;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package chess_ndl;
+
 /**
  *
  * @author newdeviceslab_2
@@ -23,7 +29,7 @@ public class Move {
     
     @Override
     public String toString() {
-        return from + " to " + to;
+        return from.toString() + to; //via toString() van Point
     }
     
     public Move reverseMove() {
