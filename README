@@ -1,0 +1,39 @@
+Dit project bestaat momenteel uit aparte onderdelen, omdat de integratie niet voltooid is.
+
+- Het CV deel opent de webcam met index 1 en probeert de schaakstukken te lezen.
+- Het NXJ deel kan de stukken verplaatsen
+
+Dependencies
+============
+- LeJOS NXJ: http://www.lejos.org/nxj-downloads.php
+- OpenCV 3: http://opencv.org/downloads.html
+- Arduino SDK: https://www.arduino.cc/en/Main/Software
+- Python 2
+
+Gewone uitvoering
+==============
+```
+cd cv
+python2 test_hist.py
+
+cd nxj
+make
+```
+
+Uitvoering met nix
+=======
+Het is ook mogelijk om de dependencies automatisch te verkrijgen met nix (http://nixos.org/nix/), dit is echter niet nodig.
+
+```
+cd cv
+nix-shell --run "python2 test_hist.py"
+
+
+cd nxj
+nix-shell --run make
+```
+
+Gebruik van het arduino deel
+====
+
+Open een seriele interface, wacht op het woord "init", toets 0 voor uit, 1 voor aan, 2 voor omgekeerd, en 4 voor zwak omgekeerd.
