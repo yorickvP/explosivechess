@@ -1,15 +1,12 @@
 .DELETE_ON_ERROR:
-ExplosiveChess.nxj: ExplosiveChess.class
-%.nxj:
-	nxjlink -o $@ $(<:.class=)
 
 %.class: %.java
-	nxjc $<
+	nxjpcc $<
 
-.PHONY: clean
+run: Chess.class
+	sudo nxjpc Chess
+
+.PHONY: clean run
 
 clean:
-	rm -f ExplosiveChess.class ExplosiveChess.nxj
-
-run: ExplosiveChess.nxj
-	sudo nxjupload -r ExplosiveChess
+	rm -f Chess.class
