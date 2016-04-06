@@ -9,7 +9,16 @@ in
 
 with pkgs; stdenv.mkDerivation {
   name = "chess";
-  buildInputs = [ python numpy opencv ];
+  buildInputs = [ python numpy opencv makeWrapper ];
   src = ./.;
+  builder = writeScript "builder.sh" ''
+    source $stdenv/setup
+    mkdir -p $out/bin
+    cp $src/*.py $out/bin
+    for i in `find $out/bin/ -type f -perm -111`; do
+    wrapProgram $i \
+            --prefix PYTHONPATH : "$(toPythonPath $out):$(toPythonPath ${numpy}):$(toPythonPath ${opencv})"
+    done
+  '';
 }
 

@@ -16,6 +16,8 @@ BLACK = (0, 0, 0)
 
 CHESS_SIZE = 600
 
+cap = cv2.VideoCapture(1)
+
 class HistTest(Test):
 	def __init__(self, filename):
 		self.BORDER = 50
@@ -45,13 +47,17 @@ class HistTest(Test):
 				elif wt_cnt >= 75:
 					cv2.circle(col, (x+step/2, y+step/2), 25, WHITE, -1)
 				cv2.putText(col, s ,(x, y+step/2), font, 0.5,BLUEGREEN,2,cv2.LINE_AA)
+	def update(self):
+		# pass
+		ret, frame = cap.read()
+		self.orig_img = frame
+		self.draw()
 
-
-t = HistTest("test_images/chess3.jpg")
-
+ret, frame = cap.read()
+t = HistTest(frame)
 t.run({
-	"black": (0, 255, 50),
-	"white": (0, 255, 175),
-	"ycutoff": (0, CHESS_SIZE/8, 28)
+	"black": (0, 255, 21),
+	"white": (0, 255, 227),
+	"ycutoff": (0, CHESS_SIZE/8, 0)
 })
 

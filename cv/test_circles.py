@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import lines as ln
 
+
 from test import Test
 
 
@@ -23,14 +24,15 @@ class CircleTest(Test):
 		self.BORDER = 0
 		Test.__init__(self, filename)
 	def _draw_board(self, dst):
-		# detect and draw circles
-		for (x, y, white) in detectcircles(dst):
-			if white:
-				cv2.circle(dst, (x, y), 25, WHITE, -1)
-			else:
-				cv2.circle(dst, (x, y), 25, BLACK, -1)
-
 		self.drawgrid(dst)
+		# # detect and draw circles
+		# for (x, y, white) in detectcircles(dst):
+		# 	if white:
+		# 		cv2.circle(dst, (x, y), 25, WHITE, -1)
+		# 	else:
+		# 		cv2.circle(dst, (x, y), 25, BLACK, -1)
+
+		# self.drawgrid(dst)
 
 def colval(col):
 	coluint = np.uint8([[col]])
@@ -62,8 +64,10 @@ def detectcircles(dst):
 			m = cv2.mean(dst, mask=mask)
 			res.append((x, y, colval(m) > 99))
 	return res
-
-t = CircleTest("test_images/chess2.jpg")
+cap = cv2.VideoCapture(1)
+ret, frame = cap.read()
+t = CircleTest(frame)
+#t = CircleTest(cv2.imread("./mpv-shot0002.png"))
 
 t.run({
 	'dp': (0, 10, 1),

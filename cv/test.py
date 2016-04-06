@@ -16,9 +16,9 @@ BLACK = (0, 0, 0)
 CHESS_SIZE = 600
 
 class Test(object):
-	def __init__(self, filename):
-		img = cv2.imread(filename)
-		self.orig_img = cv2.resize(img, (0,0), fx=0.25, fy=0.25)
+	def __init__(self, img):
+		self.orig_img = img
+		#self.orig_img = cv2.resize(img, (0,0))
 		gray = cv2.cvtColor(self.orig_img,cv2.COLOR_BGR2GRAY)
 
 		self.input_edge = cv2.Canny(self.orig_img, 100, 210)
@@ -28,6 +28,7 @@ class Test(object):
 		self.board_M = None
 		self.phase = 0
 	def draw_input_edge(self):
+		cv2.imshow('src', self.input_edge)
 		img = cv2.cvtColor(self.input_edge, cv2.COLOR_GRAY2BGR)
 		for [[rho,theta]] in self.input_lines:
 			(x1, y1), (x2, y2) = ln.linetopoints(rho, theta)
@@ -71,6 +72,8 @@ class Test(object):
 			pts2 = np.float32([(self.BORDER, self.BORDER), (CHESS_SIZE+self.BORDER, self.BORDER), (CHESS_SIZE+self.BORDER, CHESS_SIZE+self.BORDER), (self.BORDER, CHESS_SIZE+self.BORDER)])
 			self.board_M = cv2.getPerspectiveTransform(pts1, pts2)
 		self.draw()
+	def update(self):
+		pass
 	def run(self, trackbars):
 		def mousecb(evt, x, y, i, void):
 			if evt == 1:
@@ -84,8 +87,12 @@ class Test(object):
 			cv2.setTrackbarPos(key, 'warp', cur)
 		cv2.setMouseCallback('dst', mousecb)
 		while True:
-			if cv2.waitKey(0) == 113:
+			k = cv2.waitKey(100)
+			if k == 113:
 				cv2.destroyAllWindows()
 				break
+			else:
+				self.update()
+
 
 
